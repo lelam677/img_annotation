@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import {
+  ReactPictureAnnotation,
+  defaultShapeStyle,
+} from "react-picture-annotation";
+import Loadpicture from "./component/Loadpicture";
 
-function App() {
+import { myImage1, myImage2, myImage3 } from "./img/index";
+import ColorSelect from "./component/ColorSelect";
+// interface Label {
+//   id: string;
+//   x: number;
+//   y: number;
+//   width: number;
+//   height: number;
+//   color: string;
+//   comment?: string;
+// }
+
+const App: React.FC = () => {
+  const [color, setColor] = useState("#000000");
+
+  const getColor = (data: string) => setColor(data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="section">
+      <div className="list-color">
+        <ColorSelect getColor={getColor} />
+      </div>
+      <div className="picture">
+        <Loadpicture picture={myImage2} color={color} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
