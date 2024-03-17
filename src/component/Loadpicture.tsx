@@ -9,41 +9,54 @@ import CustomInputElement from "./CustomInputElementProps";
 interface LoadpictureProps {
   picture: string;
   color: string;
+  onAnnotationChange: (annotations: any[]) => void;
 }
 
-interface originalObject {
-  comment: string;
-  id: string;
-  mark: {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    type: string;
-  };
-}
+// interface originalObject {
+//   comment: string;
+//   id: string;
+//   mark: {
+//     x: number;
+//     y: number;
+//     width: number;
+//     height: number;
+//     type: string;
+//   };
+// }
 
-const Loadpicture = ({ picture, color }: LoadpictureProps) => {
-  const [size, setSize] = useState({
-    width: 799,
-    height: 499,
+interface ScreenSize {
+  width: number;
+  height: number;
+}
+interface LogData {
+  img: string;
+  data: any;
+}
+const Loadpicture = ({
+  picture,
+  color,
+  onAnnotationChange,
+}: LoadpictureProps) => {
+  const [size, setSize] = useState<ScreenSize>({
+    width: window.innerWidth - 1,
+    height: window.innerHeight - 1,
   });
-
+  console.log(size.height, size.width);
+  const handleResize = () => {
+    setSize({
+      width: window.innerWidth - 300,
+      height: window.innerHeight - 50,
+    });
+  };
   useLayoutEffect(() => {
-    // const handleInitialResize = () => {
-    //   setPageSize({ width: window.innerWidth, height: window.innerHeight });
-    //   window.removeEventListener("resize", handleInitialResize);
-    //   console.log(window.innerWidth, window.innerHeight);
-    // };
-
-    // window.addEventListener("resize", handleInitialResize);
-    // return () => window.removeEventListener("resize", handleInitialResize);
-    //giá trị ban đầu của state là canvat
-    setSize({ width: 800, height: 500 });
+    handleResize();
+    // setSize({ width: 800, height: 500 });
   }, []);
-
+  const [annotations, setAnnotations] = useState<any[]>([]);
   const onSelect = (selectedId: any) => console.log(selectedId);
   const onChange = (data: any) => {
+    setAnnotations(data.annotations);
+    onAnnotationChange(data.annotations);
     console.log(data);
   };
 
