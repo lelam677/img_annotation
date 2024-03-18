@@ -55,9 +55,9 @@ const Loadpicture = ({
   const [annotations, setAnnotations] = useState<any[]>([]);
   const onSelect = (selectedId: any) => console.log(selectedId);
   const onChange = (data: any) => {
-    setAnnotations(data.annotations);
-    onAnnotationChange(data.annotations);
-    console.log(data);
+    setAnnotations(data);
+    onAnnotationChange(data);
+    // console.log(data);
   };
 
   const [valueLabel, setvalueLabel] = useState<string[]>(["input"]);

@@ -57,6 +57,7 @@ const App: React.FC = () => {
     const updatedImages = [...images];
     updatedImages[imageIndex].annotations = annotations;
     setImages(updatedImages);
+    console.log(images);
   };
 
   return (
