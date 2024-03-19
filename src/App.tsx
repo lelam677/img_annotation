@@ -60,6 +60,8 @@ const App: React.FC = () => {
     console.log(images);
   };
 
+  
+
   return (
     <div className="section">
       <div
@@ -90,6 +92,7 @@ const App: React.FC = () => {
 
       <div className="picture">
         <Loadpicture
+          key={images[currentImageIndex].src}
           picture={images[currentImageIndex].src}
           color={color}
           onAnnotationChange={(annotations) =>
