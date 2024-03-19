@@ -11,31 +11,31 @@ import "./App.css";
 import { Button } from "antd";
 import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
 import { generateRandomId } from "./component/RandomID";
+import { IAnnotation } from "react-picture-annotation/dist/types/src/Annotation";
 interface ImageData {
   id: string;
   src: string;
-  annotations: any;
+  annotations: IAnnotation[];
 }
 
 const App: React.FC = () => {
   //----------------------------------------
-  const randomId = generateRandomId();
   const [color, setColor] = useState("#000000");
   const getColor = (data: string) => setColor(data);
   //-------------------------------------------------------------------
   const initialImages: ImageData[] = [
     {
-      id: randomId,
+      id: generateRandomId(),
       src: myImage1,
       annotations: [],
     },
     {
-      id: randomId,
+      id: generateRandomId(),
       src: myImage2,
       annotations: [],
     },
     {
-      id: randomId,
+      id: generateRandomId(),
       src: myImage3,
       annotations: [],
     },
@@ -57,10 +57,11 @@ const App: React.FC = () => {
     const updatedImages = [...images];
     updatedImages[imageIndex].annotations = annotations;
     setImages(updatedImages);
+    // setAnnotation(images)
     console.log(images);
   };
 
-  
+  // const [annotation, setAnnotation] = useState()
 
   return (
     <div className="section">
@@ -98,6 +99,8 @@ const App: React.FC = () => {
           onAnnotationChange={(annotations) =>
             handleAnnotationChange(currentImageIndex, annotations)
           }
+          // annotation={images.annotations[0]}
+          loadData={images[currentImageIndex].annotations}
         />
       </div>
 

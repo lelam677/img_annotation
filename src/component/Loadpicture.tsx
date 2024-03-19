@@ -5,38 +5,52 @@ import {
   defaultShapeStyle,
 } from "react-picture-annotation";
 import CustomInputElement from "./CustomInputElementProps";
+import { IAnnotation } from "react-picture-annotation/dist/types/src/Annotation";
 
 interface LoadpictureProps {
   picture: string;
   color: string;
   onAnnotationChange: (annotations: any[]) => void;
+  loadData: IAnnotation[];
+  // annotation:any
 }
 
 // interface originalObject {
-//   comment: string;
+//   height: number;
+//   type: string;
+//   width: number;
+//   x: number;
+//   y: number;
+// }
+
+// interface anotationProps {
 //   id: string;
-//   mark: {
-//     x: number;
-//     y: number;
-//     width: number;
-//     height: number;
-//     type: string;
-//   };
+//   mask: originalObject;
 // }
 
 interface ScreenSize {
   width: number;
   height: number;
 }
-interface LogData {
-  img: string;
-  data: any;
-}
+// interface LogData {
+//   img: string;
+//   data: any;
+// }
+
+
+
+
+
 const Loadpicture = ({
   picture,
   color,
   onAnnotationChange,
+  loadData
 }: LoadpictureProps) => {
+  // const [anotationState, setAnotationState] = useState<anotationProps>();
+  // console.log(anotationState);
+
+
   const [size, setSize] = useState<ScreenSize>({
     width: window.innerWidth - 1,
     height: window.innerHeight - 1,
@@ -66,6 +80,8 @@ const Loadpicture = ({
     setvalueLabel([...valueLabel, newOption]);
   };
 
+  // console.log("logdata", arrayData);
+
   return (
     <div style={{ display: "inline" }}>
       <ReactPictureAnnotation
@@ -90,6 +106,7 @@ const Loadpicture = ({
             handleAddOption={handleAddOption}
           />
         )}
+        annotationData={loadData}
       />
     </div>
   );
